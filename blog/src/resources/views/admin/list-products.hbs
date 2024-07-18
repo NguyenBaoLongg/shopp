@@ -1,0 +1,126 @@
+<div class="container-admin">
+    <nav class="side-left">
+        <ul style="padding-left: 0">
+            <li>
+                <a href="/admin/list-products" class="logo">
+                    <span class="nav-item">Admin</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin/list-products">
+                    <i class="fas fa-home"></i>
+                    <span class="nav-item">List Users</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin/list-users">
+                    <i class="fas fa-user"></i>
+                    <span class="nav-item">List Products</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <section class="main">
+        <div class="main-top">
+            <h1>List Products</h1>
+            <i class="fas fa-user-cog"></i>
+        </div>
+        <form class="d-flex search-section" role="search">
+            <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+            />
+            <button class="btn btn-outline-success" type="submit">
+                Search
+            </button>
+        </form>
+        <div class="main-list">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Title {{{sortable "title" _sort}}}</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Sold
+                            {{{sortable "soldProduct" _sort}}}</th>
+                        <th scope="col">Discout</th>
+                        <th scope="col">Price {{{sortable "price" _sort}}}</th>
+                        <th scope="col">Tool</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each product}}
+                        <tr>
+                            <th scope="row">{{sum @index 1}}</th>
+                            <td>{{this.title}}</td>
+                            <td><img src="{{this.image}}" alt="" /></td>
+                            <td>{{this.soldProduct}}</td>
+                            <td>{{this.discout}}</td>
+                            <td>{{format this.price}}</td>
+                            <td class="btn-manage btn-tool">
+                                <a
+                                    href=""
+                                    class="btn-link"
+                                    data-toggle="modal"
+                                    data-target="#delete-product-modal"
+                                    data-id="{{this._id}}"
+                                >Xóa</a>
+                            </td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+{{! Confirm delete }}
+<div id="delete-product-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn muốn xóa sản phẩm này ?</p>
+            </div>
+            <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                >Close</button>
+                <button
+                    type="button"
+                    class="btn btn-danger"
+                    id="btn-delete-product"
+                >Xoa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form method="POST" name="delete-product-form" action=""></form>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () { var productId;
+    var deleteForm = document.forms["delete-product-form"]; var
+    btnDeleteProduct= document.getElementById("btn-delete-product");
+    $("#delete-product-modal").on("show.bs.modal", function (event) { var
+    button= $(event.relatedTarget); productId = button.data("id"); });
+    btnDeleteProduct.onclick = function () { deleteForm.action =
+    "/admin/delete-product/" +productId + "?_method=DELETE";
+    deleteForm.submit(); }; }); const header =
+    document.querySelector(".header"); header.style.display = "none"
+</script>

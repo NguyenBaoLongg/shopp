@@ -1,0 +1,68 @@
+<div style="background-color: #e3e2e2; height:100%"><div>
+        <div class="mt-4 create-section">
+            <h3>Đăng sản phẩm</h3>
+
+            <form method="POST" action="/products/store" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="title">Tên sản phẩm</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="title"
+                        name="title"
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="image">Hình ảnh</label>
+                    <input
+                        type="file"
+                        class="form-control"
+                        id="image"
+                        name="image"
+                        accept="image/png,image/gif,image/jpg,image/jpeg"
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="discout">Giảm giá</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="discout"
+                        name="discout"
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="price">Giá tiền </label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="price"
+                        name="price"
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="description">Mô tả </label>
+                    <textarea
+                        type="text"
+                        class="form-control"
+                        id="description"
+                        name="description"
+                    ></textarea>
+                </div>
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                    style="background-color: #ee4d2d;"
+                >Thêm sản phẩm</button>
+            </form>
+        </div>
+    </div></div>
+
+{{!-- <script>
+    {{!-- const priceInput = document.getElementById("price");
+    priceInput.addEventListener("input",(e)=>{
+        let value = e.target.value;
+        value = value.replace(/[^0-9]/g,"");
+        e.target.value = parseInt(value).toLocaleString("vi-VN");
+    }) --}}
+</script> --}}

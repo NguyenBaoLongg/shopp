@@ -1,0 +1,132 @@
+<div class="container-admin">
+    <nav class="side-left">
+        <ul style="padding-left: 0">
+            <li>
+                <a href="/admin/list-products" class="logo">
+                    <span class="nav-item">Admin</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin/list-products">
+                    <i class="fas fa-home"></i>
+                    <span class="nav-item">List Products</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin/list-users">
+                    <i class="fas fa-user"></i>
+                    <span class="nav-item">List Users</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <section class="main">
+        <div class="main-top">
+            <h1>List Users</h1>
+            <i class="fas fa-user-cog"></i>
+        </div>
+        <form class="d-flex search-section" role="search">
+            <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+            />
+            <button class="btn btn-outline-success" type="submit">
+                Search
+            </button>
+        </form>
+        <div class="main-list">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Birth</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each user}}
+                        <tr>
+                            <th scope="row">{{sum @index 1}}</th>
+                            <td>{{this.name}}</td>
+                            <td>{{this.email}}</td>
+                            <td>{{this.birth}}</td>
+                            <td>{{this.gender}}</td>
+                            <td>{{this.phone}}</td>
+                            <td>{{this.address}}</td>
+                            <td class="btn-manage btn-tool">
+                                <a
+                                    href=""
+                                    class="btn-link"
+                                    data-toggle="modal"
+                                    data-target="#delete-user-modal"
+                                    data-id="{{this._id}}"
+                                >Xóa</a>
+                            </td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+{{! Confirm delete }}
+<div id="delete-user-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn muốn xóa sản phẩm này ?</p>
+            </div>
+            <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                >Close</button>
+                <button
+                    type="button"
+                    class="btn btn-danger"
+                    id="btn-delete-user"
+                >Xoa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form method="POST" name="delete-user-form" action=""></form>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () { 
+        var userId;
+        var deleteForm = document.forms["delete-user-form"];
+         var btnDeleteUser= document.getElementById("btn-delete-user");
+        $("#delete-user-modal").on("show.bs.modal", function (event) { 
+            var button= $(event.relatedTarget); 
+            userId = button.data("id"); 
+        });
+        btnDeleteUser.onclick = function () { 
+            deleteForm.action = "/admin/delete-user/" +userId + "?_method=DELETE"; 
+            deleteForm.submit(); 
+        }; 
+    }); 
+    const header = document.querySelector(".header"); header.style.display =
+    "none"
+</script>

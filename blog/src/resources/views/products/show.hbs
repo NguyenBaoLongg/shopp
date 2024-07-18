@@ -1,0 +1,98 @@
+<div class="body-background">
+    <div class="product-briefing">
+        <div class="content-left">
+            <img src="{{product.image}}" alt="" />
+        </div>
+        <div class="content-right">
+            <div>
+                {{! section title }}
+                <div class="title-section">
+                    <span>{{product.title}}</span>
+                </div>
+                {{! section product sold }}
+                <div class="soldProduct-section">
+                    <div class="soldProduct-content">
+                        <span class="soldProduct-number">{{formatSoldProduct
+                                product.soldProduct
+                            }}</span>
+                        <span class="soldProduct-text">Đã bán</span>
+                    </div>
+                </div>
+                {{! section price }}
+                <div style="margin-top:10px;margin-bottom:20px">
+                    <div class="flex flex-column">
+                        <div class="price-section flex">
+                            <div class="price-number">₫
+                                {{format product.price}}</div>
+                            <div class="sale-percent">{{product.percent}}% giảm
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{! section vourcher }}
+                <div class="vourcher-section">
+                    <div class="mini-vourcher">
+                        <h3 class="mini-vourcher__label">
+                            Mã giảm giá của Shop
+                        </h3>
+                        <div class="mini-vourcher__wrapper">
+                            <div class="vourcher-tiket">Giảm
+                                {{formatDiscout product.percent}}k</div>
+                        </div>
+                    </div>
+                </div>
+                {{! section quantity }}
+                <div class="quantity-section flex items-center">
+                    <h3>Số lượng</h3>
+                    <div class="flex items-center">
+                        <div style="margin-right:15px">
+                            <div class="shopp-quantity-input">
+                                <button
+                                    class="quantity-button_decrease"
+                                    aria-label="decrease"
+                                >-</button>
+                                <input
+                                    type="text"
+                                    value="1"
+                                    class="quantity-input"
+                                />
+                                <button
+                                    class="quantity-button_increase"
+                                    aria-label="increase"
+                                >+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{!-- section btn --}}
+                <div class="btn-group">
+                    <button class="button-add-cart"><span>Thêm vào giỏ hàng</span></button>
+                    <button class="btn-order"><span>Đặt hàng</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+        const buttonDecrease = document.querySelector('.quantity-button_decrease')
+        const buttonIncrease = document.querySelector('.quantity-button_increase')
+        const inputValue = document.querySelector('.quantity-input')
+        
+        buttonDecrease.onclick=() => {
+        var quantity = Number(inputValue.value);
+        quantity -= 1; // Decrease quantity
+        inputValue.value = quantity;
+        };
+
+    buttonIncrease.addEventListener('click', () => {
+        var quantity = Number(inputValue.value);
+        quantity += 1; // Increase quantity
+        inputValue.value = quantity;
+    });
+
+    const btnSignUp = document.querySelector('.btn-register'); if (btnLogin) {
+    btnLogin.style.display = 'none'; } if (btnSignUp) { btnSignUp.style.display
+    = 'none'; }
+
+</script>

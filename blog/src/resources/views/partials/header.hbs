@@ -1,0 +1,191 @@
+<header class="header">
+    <div class="grid">
+        <nav class="header__navbar">
+            <ul class="header__navbar-list">
+                <li
+                    class="header__navbar-item header__navbar-item-separate header__navbar-item-padding"
+                >
+                    <a href="#">Kênh người bán</a>
+                </li>
+                <li class="header__navbar-item header__navbar-item-padding">
+                    <a href="#">Trờ thành người bán shopee</a>
+                </li>
+                <li
+                    class="header__navbar-item header__navbar-item-margin header__navbar-item__dowload"
+                >
+                    Tải ứng dụng
+                    <div class="header__qr">
+                        <img
+                            src="./images/qrcode.png"
+                            alt="qr code"
+                            class="header__qr_image"
+                        />
+                        <div class="header__image_apps">
+                            <a href="#" class="link_appstore"><img
+                                    src="./images/applestore.png"
+                                    alt="app store"
+                                    class="qr_image qr_appstore"
+                                /></a>
+                            <a href="#" class="link_ggplay"><img
+                                    src="./images/chplay.png"
+                                    alt="gg play"
+                                    class="qr_image qr_ggplay"
+                                /></a>
+                        </div>
+                        <a href="#" class="link_gallery"><img
+                                src="./images/appgalley.png"
+                                alt="gallery"
+                                class="qr_image qr_gallery"
+                            /></a>
+                    </div>
+                </li>
+                <li
+                    class="header__navbar-item header__navbar-item--connect header__navbar-item--margin"
+                >
+                    Kết nối
+                    <a href="#"><i
+                            class="fa-brands fa-facebook"
+                            style="color: #ffffff"
+                        ></i></a>
+                    <a href="#"><i
+                            class="fa-brands fa-instagram"
+                            style="color: #ffffff"
+                        ></i></a>
+                </li>
+            </ul>
+            <ul class="header__navbar-list">
+                <li class="header__navbar-item header__navbar-item-infor">
+                    <a href="#"><i class="fa-regular fa-bell"></i> Thông Báo</a>
+                    <div class="subnav__notify">
+                        <div class="subnav__notify-header-wrap">
+                            <div class="subnav__notify-header">
+                                <img
+                                    class="subnav__notify-image"
+                                    src="./images/inform.png"
+                                    alt="inform"
+                                />
+                                <p class="discrip__img-inform"></p>
+                            </div>
+                        </div>
+                        <div class="subnav__notify-footer">
+                            <a href="/user/profile">
+                                Đăng nhập
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li class="header__navbar-item">
+                    <a
+                        class="header__navbar-item-link header__navbar-item-link--help"
+                        href="#"
+                    ><i
+                            class="fa-regular fa-circle-question"
+                            style="color: #ffffff"
+                        ></i>Hỗ Trợ</a>
+                </li>
+                <li class="header__navbar-item header__navbar-item-language">
+                    <a
+                        class="header__navbar-item-link navbar_language"
+                        href="#"
+                    >
+                        <i
+                            class="fa-solid fa-globe"
+                            style="color: #ffffff"
+                        ></i>Tiếng Việt
+                        <i
+                            class="fa-solid fa-chevron-down"
+                            style="color: #ffffff"
+                        >
+                        </i>
+                    </a>
+                    <div class="subnav__language">
+                        <div class="subnav__language-vn">Tiếng Việt</div>
+                        <div class="subnav__language-english">English</div>
+                    </div>
+                </li>
+                <div class="dropdown">
+                    <a
+                        class="btn btn-main dropdown-toggle btn-user"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                        {{handleUser user.name}}
+                    </a>
+                    <ul class="dropdown-menu" style="top:23px">
+                        <li><a
+                                class="dropdown-item"
+                                href="/me/stored/personalinfor"
+                            >Tài khoản của tôi</a></li>
+                        <li><a
+                                class="dropdown-item"
+                                href="/products/create"
+                            >Đăng bán hàng</a></li>
+                        <li><a
+                                class="dropdown-item"
+                                href="/me/stored/myproducts"
+                            >Quản lý sản phẩm</a></li>
+                        <li><form
+                                action="/api/user/log-out"
+                                method="POST"
+                                id="form-3"
+                                class="dropdown-item"
+                            ><button
+                                    style="border:none;background-color:#fff"
+                                >Đăng xuất</button>
+                            </form></li>
+                            {{{handleAdmin user.isAdmin}}}
+                    </ul>
+                </div>
+            </ul>
+        </nav>
+
+        <div class="header-with-search">
+            <nav class="nav-search">
+                <div id="logo-shopee">
+                    <a href="/">
+                        Shoppp
+                    </a>
+                </div>
+                <div id="search_section">
+                    <div class="header-search">
+                        <div class="search-input">
+                            <input
+                                type="text"
+                                placeholder="Shopee bao ship 0Đ - Đăng kí ngay!"
+                            />
+                            <button class="search_icon-wrap">
+                                <i class="bx bx-search-alt-2 search_icon"> </i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="suggest_search-wrap">
+                        <div class="suggest_search"></div>
+                    </div>
+                </div>
+                <div id="cart_icon">
+                    <div class="container-cart">
+                        <a href="#"><i
+                                class="bx bx-cart header-cart-icon"
+                            ></i></a>
+                    </div>
+                    <div class="wrap-modal_cart size-modal arrow-up">
+                        <div class="modal-cart">
+                            <div class="desc-modal">
+                                <div class="text-product_more">Sản phẩm mới thêm</div>
+                                <ul class="list-products-in-cart"></ul>
+                                <div class="show-in-cart">
+                                    <div class="amount-in-cart">
+                                        <p>3 Thêm vào giỏ hàng</p>
+                                    </div>
+                                    <button class="btn-in-cart">Xem giỏ hàng</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>

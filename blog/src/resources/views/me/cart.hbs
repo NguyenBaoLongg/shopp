@@ -1,0 +1,126 @@
+<div class="stardust-descrip">
+    <div class="check-box_wrap">
+        <label for="" class="descrip-checkbox--all">
+            <input type="checkbox" class="descrip-checkbox__input--all" />
+        </label>
+    </div>
+    <div class="descrip-name">Sản phẩm</div>
+    <div class="descrip-unit-price">Đơn giá</div>
+    <div class="descrip-amount">Số lượng</div>
+    <div class="descrip-price">Số tiền</div>
+    <div class="descrip-operator">Thao tác</div>
+</div>
+<div class="stardust-in-cart">
+    <div class="stardust-list-items"></div>
+</div>
+<div class="section-sum-price">
+    <div class="display-sum-price"></div>
+    <button class="btn-order"><span>Mua hàng</span></button>
+</div>
+
+<script>
+    {{!-- const btnLogin = document.querySelector('.btn-login')
+    const btnSignUp = document.querySelector('.btn-register'); if (btnLogin) {
+    btnLogin.style.display = 'none'; } if (btnSignUp) { btnSignUp.style.display
+    = 'none'; } --}}
+    const allProducts = [
+  {
+      id: 1,
+      src: "https://down-vn.img.susercontent.com/file/e66cc386528d8c5119b59cd20ccacc22_tn",
+      percent: 68,
+      favourite: true,
+      title: "Loa bluetooth mini không dây,nghe nhạc,giá rẻ,công nghệ blutooth 5.0 BINTECH",
+      discout: 2,
+      decrease: true,
+      timeDiscout: " ₫ 63.000 lúc 00:00",
+      price: 199000,
+      soldProduct: 12000,
+  },
+  {
+      id: 2,
+      src: "https://down-vn.img.susercontent.com/file/202cda63239ad682d5a79c9ad74abcc0_tn",
+      percent: 52,
+      favourite: false,
+      title: "body mist Xịt Thơm Toàn thân Victoria's Secret Body Mist 250ml Siêu Thơm Cá Tính, Năng Động",
+      discout: 0,
+      decrease: true,
+      timeDiscout: " Flash Sale",
+      price: 22000,
+      soldProduct: 101000,
+  },
+  {
+      id: 3,
+      src: "https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-lh004pkew25v98_tn",
+      percent: 52,
+      favourite: true,
+      title: "Túi xách nữ đeo vai đeo chéo kẹp nách thời trang mẫu mới lotiba",
+      discout: 0,
+      decrease: true,
+      timeDiscout: " Flash Sale",
+      price: 32000,
+      soldProduct: 9400,
+  }
+]
+
+const format=(number) => {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
+const allItemInCartArr = allProducts
+  .map((val) => {
+    return `
+    <div class="stardust-item">
+    <div class="check-box_wrap">
+      <label for="" class="descrip-checkbox--all">
+        <input
+          type="checkbox"
+          class="descrip-checkbox__input--all"
+        />
+      </label>
+    </div>
+    <div class="stardust-info__wrap">
+      <div class="stardust-image">
+        <img
+          src="${val.src}"
+          alt=""
+        />
+      </div>
+      <div class="stardust-name">
+        <span>${val.title}</span>
+      </div>
+    </div>
+    <div class="stardust-classify"></div>
+    <div class="stardust-unitPrice">
+      <span class="unit-price">${format(val.price)}</span>
+      <span class="sold-price">${format(val.price)}</span>
+    </div>
+    <div class="stardust-amount">
+      <div class="input-quantity">
+        <button class="decrease-quantity btn-amount">
+          <i class="bx bx-minus"></i>
+        </button>
+        <div class="text-amount"><span>1</span></div>
+        <button class="increase-quantity btn-amount">
+          <i class="bx bx-plus"></i>
+        </button>
+      </div>
+    </div>
+    <div class="stardust-price">${format(val.price)}</div>
+    <div class="stardust-operator">
+      <button class="delete-product">Xóa</button>
+    </div>
+  </div>
+    `;
+  })
+  .join("\n");
+const stardustListItem = document.querySelector(".stardust-list-items");
+stardustListItem.innerHTML = allItemInCartArr;
+
+const displaySumPrice = document.querySelector('.display-sum-price')
+var sumPrice =0;
+allProducts.forEach((value)=>{
+  sumPrice+=value.price;
+})
+displaySumPrice.textContent = format(sumPrice)
+
+</script>

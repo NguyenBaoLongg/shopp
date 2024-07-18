@@ -1,0 +1,97 @@
+<div class="container">
+    <div class="mt-4 stored-product-section">
+        <h3>Sản phẩm của tôi</h3>
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Ảnh sản phẩm</th>
+                    <th scope="col">Tên sản phẩm</th>
+                    <th scope="col">Giá sản phẩm</th>
+                    <th scope="col" colspan="2">Thời gian tạo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each products}}
+                    <tr>
+                        <th scope="row">{{sum @index 1}}</th>
+                        <td><img src="{{this.image}}" alt="" /></td>
+                        <td>{{this.title}}</td>
+                        <td>{{format this.price}}</td>
+                        <td class="btn-manage">
+                            <a
+                                href="/products/{{this._id}}/edit"
+                                class="btn-link"
+                            >Sửa</a>
+                            <a
+                                href=""
+                                class="btn-link"
+                                data-toggle="modal"
+                                data-target="#delete-product-modal"
+                                data-id="{{this._id}}"
+                            >Xóa</a>
+                        </td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{{! Confirm delete }}
+<div id="delete-product-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn muốn xóa sản phẩm này ?</p>
+            </div>
+            <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                >Close</button>
+                <button
+                    type="button"
+                    class="btn btn-danger"
+                    id="btn-delete-product"
+                >Xoa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{! form delete hiden }}
+<form method="POST" name="delete-product-form" action=""></form>
+
+<script type="module" src="">
+    document.addEventListener("DOMContentLoaded", function () { 
+        var productId;
+        var deleteForm = document.forms["delete-product-form"];
+         var btnDeleteProduct= document.getElementById("btn-delete-product");
+        $("#delete-product-modal").on("show.bs.modal", function (event) { 
+            var button= $(event.relatedTarget); 
+            productId = button.data("id"); });
+        btnDeleteProduct.onclick = function () { 
+            deleteForm.action = "/products/" +productId + "?_method=DELETE"; deleteForm.submit(); 
+            }; 
+    }); 
+    const btnSignUp =document.querySelector('.btn-register'); 
+    if (btnLogin) {
+        btnLogin.style.display = 'none'; 
+    } 
+    if (btnSignUp) { 
+        btnSignUp.style.display= 'none'; 
+    }
+</script>
