@@ -103,41 +103,7 @@
                         <div class="subnav__language-english">English</div>
                     </div>
                 </li>
-                <div class="dropdown">
-                    <a
-                        class="btn btn-main dropdown-toggle btn-user"
-                        href="#"
-                        role="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                    >
-                        {{handleUser user.name}}
-                    </a>
-                    <ul class="dropdown-menu" style="top:23px">
-                        <li><a
-                                class="dropdown-item"
-                                href="/me/stored/personalinfor"
-                            >Tài khoản của tôi</a></li>
-                        <li><a
-                                class="dropdown-item"
-                                href="/products/create"
-                            >Đăng bán hàng</a></li>
-                        <li><a
-                                class="dropdown-item"
-                                href="/me/stored/myproducts"
-                            >Quản lý sản phẩm</a></li>
-                        <li><form
-                                action="/api/user/log-out"
-                                method="POST"
-                                id="form-3"
-                                class="dropdown-item"
-                            ><button
-                                    style="border:none;background-color:#fff"
-                                >Đăng xuất</button>
-                            </form></li>
-                            {{{handleAdmin user.isAdmin}}}
-                    </ul>
-                </div>
+                {{{handleUser user}}}
             </ul>
         </nav>
 
@@ -166,7 +132,7 @@
                 </div>
                 <div id="cart_icon">
                     <div class="container-cart">
-                        <a href="#"><i
+                        <a href="/cart"><i
                                 class="bx bx-cart header-cart-icon"
                             ></i></a>
                     </div>

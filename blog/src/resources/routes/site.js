@@ -8,7 +8,7 @@ const siteController = require("../../app/controllers/SiteController");
 
 // newController.index
 
-router.get("/", authAdminMiddleware, authUserMiddleware, siteController.index);
+router.get("/", siteController.index);
 router.get("/sign-up", siteController.renderSignUp);
 router.get("/sign-in", siteController.renderSignIn);
 

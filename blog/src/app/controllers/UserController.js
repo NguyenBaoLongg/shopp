@@ -433,8 +433,9 @@ class UserController {
             });
         }
         const response = await userService.deleteUserInDB(userId);
-        // console.log(response)
-        return res.status(200).json(response);
+        if(response.status==="SUCCESS"){
+            res.redirect("back");
+        }
     };
 
     getAllUser = async (req, res) => {

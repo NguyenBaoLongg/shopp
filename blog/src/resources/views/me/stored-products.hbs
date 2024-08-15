@@ -75,17 +75,18 @@
 {{! form delete hiden }}
 <form method="POST" name="delete-product-form" action=""></form>
 
-<script type="module" src="">
+<script >
     document.addEventListener("DOMContentLoaded", function () { 
         var productId;
         var deleteForm = document.forms["delete-product-form"];
-         var btnDeleteProduct= document.getElementById("btn-delete-product");
+        var btnDeleteProduct= document.getElementById("btn-delete-product");
         $("#delete-product-modal").on("show.bs.modal", function (event) { 
             var button= $(event.relatedTarget); 
             productId = button.data("id"); });
-        btnDeleteProduct.onclick = function () { 
-            deleteForm.action = "/products/" +productId + "?_method=DELETE"; deleteForm.submit(); 
-            }; 
+            btnDeleteProduct.onclick = function () { 
+            deleteForm.action = "/products/delete/" +productId + "?_method=DELETE"; 
+            deleteForm.submit(); 
+        }; 
     }); 
     const btnSignUp =document.querySelector('.btn-register'); 
     if (btnLogin) {

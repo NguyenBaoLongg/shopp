@@ -2978,6 +2978,7 @@ body {
     margin-left: 20px;
     background-color: #ee4d2d;
     border: none;
+    display: flex;
 }
 
 .button-add-cart,
@@ -3135,8 +3136,14 @@ td {
     margin-bottom: 12px;
     overflow: hidden;
     padding: 0 20px;
-    margin-top: 20px;
+    margin-top: 150px;
     margin-bottom: 20px;
+}
+
+.stardust-descrip_child {
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
 }
 
 .check-box_wrap {
@@ -3328,6 +3335,7 @@ td {
     border-top: 1px solid rgba(0, 0, 0, 0.09);
     border-bottom: 1px solid rgba(0, 0, 0, 0.09);
     position: relative;
+    width : 20px;
 }
 
 .text-amount span {
@@ -3402,3 +3410,4 @@ td {
     padding: 10px 20px 10px 20px;
     border: none;
 }
+

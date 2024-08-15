@@ -85,9 +85,9 @@ nav .fas {
     top: 12px;
     margin-left: 10px;
 }
-a:hover {
-    background: #eee;
-}
+// a:hover {
+//     background: #eee;
+// }
 .logout {
     position: absolute;
     bottom: 0;
@@ -124,4 +124,13 @@ a:hover {
 .btn-tool a {
     color: red !important;
     text-decoration: underline;
+}
+
+.icon-list-product{
+    position: relative;
+    width: 70px;
+    height: 40px;
+    top: 14px;
+    font-size: 20px;
+    text-align: center;
 }

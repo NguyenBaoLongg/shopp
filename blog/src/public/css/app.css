@@ -2553,7 +2553,8 @@ body {
 .btn-order {
   margin-left: 20px;
   background-color: #ee4d2d;
-  border: none; }
+  border: none;
+  display: flex; }
 
 .button-add-cart,
 .btn-order {
@@ -2686,8 +2687,13 @@ td {
   margin-bottom: 12px;
   overflow: hidden;
   padding: 0 20px;
-  margin-top: 20px;
+  margin-top: 150px;
   margin-bottom: 20px; }
+
+.stardust-descrip_child {
+  width: 1200px;
+  margin: 0 auto;
+  display: flex; }
 
 .check-box_wrap {
   box-sizing: border-box;
@@ -2852,7 +2858,8 @@ td {
   padding-right: 15px;
   border-top: 1px solid rgba(0, 0, 0, 0.09);
   border-bottom: 1px solid rgba(0, 0, 0, 0.09);
-  position: relative; }
+  position: relative;
+  width: 20px; }
 
 .text-amount span {
   position: absolute;
@@ -2993,9 +3000,6 @@ nav .fas {
   top: 12px;
   margin-left: 10px; }
 
-a:hover {
-  background: #eee; }
-
 .logout {
   position: absolute;
   bottom: 0; }
@@ -3027,6 +3031,14 @@ a:hover {
 .btn-tool a {
   color: red !important;
   text-decoration: underline; }
+
+.icon-list-product {
+  position: relative;
+  width: 70px;
+  height: 40px;
+  top: 14px;
+  font-size: 20px;
+  text-align: center; }
 
 .login-section,
 .register-section {

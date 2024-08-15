@@ -5,21 +5,24 @@ const {
     mutippleMongooseToObject,
 } = require("../../resources/util/mongoose");
 const product = require("../models/product");
+const jwtVerify = require("../../resources/services/JwtVerify");
 class MyProductController {
     //[GET] /me/stored/myproduct
-    storedProducts(req, res, next) {
-        const userId = req.data._conditions._id;
-        Product.find({ userId: userId })
-            .then((products) => {
-                res.render("me/stored-products", {
-                    products: mutippleMongooseToObject(products),
-                });
-            })
-            .catch(next);
-    }
-
-    show(req, res, next) {
-        res.render("search");
+    async storedProducts(req, res, next) {
+        try {
+            const decoded = jwtVerify.jwtVerifyAccessToken(
+                req.cookies.access_token);
+            const userId = decoded.payload.id;
+            const user = await User.findById(userId);
+            const products = await Product.find({ userId: userId });
+    
+            res.render("me/stored-products", {
+                products: mutippleMongooseToObject(products),
+                user: user.toObject(),
+            });
+        } catch (error) {
+            next(error);
+        }
     }
 
     personalInfor(req, res, next) {
@@ -28,10 +31,6 @@ class MyProductController {
                 user: user.toObject(),
             });
         });
-    }
-
-    myCart(req, res, next) {
-        res.render("me/cart");
     }
 }
 

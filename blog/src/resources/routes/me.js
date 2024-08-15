@@ -14,6 +14,5 @@ router.get(
     authLoginMiddleware,
     myProductController.storedProducts
 );
-router.get("/cart", authLoginMiddleware, myProductController.myCart);
 
 module.exports = router;

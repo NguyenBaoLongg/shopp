@@ -14,9 +14,7 @@ class SiteController {
                 req.cookies.access_token
             );
             const userId = decoded.payload.id;
-            // User.find({ _id: userId }).then((user) => {
-            //     user.cart.omit(["aaa"]);
-            // });
+
             User.find({ _id: userId }).then((user) => {
                 Product.find({}).then((product) => {
                     res.render("home", {

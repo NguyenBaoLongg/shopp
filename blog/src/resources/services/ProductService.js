@@ -1,6 +1,12 @@
 const ProductDB = require("../../app/models/product");
 port = 3000;
 
+const  convertToNumber=(str) =>{
+    const numberStr = str.replace(/\./g, '');
+    return numberStr;
+}
+
+
 const createProductService = async (product) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -14,16 +20,7 @@ const createProductService = async (product) => {
                 soldProduct,
                 description,
             } = product;
-            console.log("Product", product);
-            // const checkProduct = await ProductDB.findOne({
-            //     title: title,
-            // });
-            // if (checkProduct !== null) {
-            //     resolve({
-            //         status: "OK",
-            //         message: "The name od product is already",
-            //     });
-            // }
+            product.price = Number(convertToNumber(product.price));
             product.soldProduct = 0;
             product.timeDiscout = " ₫ 63.000 lúc 00:00";
             product.percent = Math.floor(Math.random() * (70 - 30 + 1) + 30);
@@ -32,6 +29,7 @@ const createProductService = async (product) => {
             const newProduct = await ProductDB(product).save();
             if (newProduct) {
                 resolve({
+                    
                     status: "SUCCESS",
                     data: newProduct,
                 });
@@ -55,14 +53,11 @@ const updateProductService = async (productId, data) => {
                     message: "The product don't exist",
                 });
             }
-            console.log(productId);
-            console.log(data);
             data.image = `http://localhost:${port}/images/${data.image}`;
             const newProduct = await ProductDB.updateOne(
                 { _id: productId },
                 data
             );
-            console.log("newProduct", newProduct);
             resolve({
                 status: "SUCCESS",
                 data: newProduct,

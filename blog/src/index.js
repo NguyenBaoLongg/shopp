@@ -10,6 +10,9 @@ const route = require("./resources/routes");
 const port = process.env.PORT || 3000;
 var cookieParser = require("cookie-parser");
 const sortMiddleware = require("./resources/middleware/sortMiddleware");
+const User = require("./app/models/user");
+const Product = require("./app/models/product");
+const jwtVerify =require("./resources/services/JwtVerify") 
 
 //Cookie
 app.use(cookieParser());
@@ -77,10 +80,7 @@ app.engine(
             },
             formatDiscout: (number) => Math.floor(number / 1000),
 
-            handleUser: (name) => {
-                return name || "User";
-            },
-
+            
             handleAdmin: (val) => {
                 if (val) {
                     return `<li><a
@@ -89,6 +89,99 @@ app.engine(
                             >Quản lý </a></li>`;
                 }
                 return "";
+            },
+
+            handleUser: (user) => {
+                if(user){
+                    if(user.isAdmin){
+                        return `
+                        <div class="dropdown">
+                    <a
+                        class="btn btn-main dropdown-toggle btn-user"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                    ${user.name}
+                    </a>
+                    <ul class="dropdown-menu" style="top:23px">
+                        <li><a
+                                class="dropdown-item"
+                                href="/me/stored/personalinfor"
+                            >Tài khoản của tôi</a></li>
+                        <li><a
+                                class="dropdown-item"
+                                href="/products/create"
+                            >Đăng bán hàng</a></li>
+                        <li><a
+                                class="dropdown-item"
+                                href="/me/stored/myproducts"
+                            >Quản lý sản phẩm</a></li>
+                        <li><a
+                                class="dropdown-item"
+                                href="/admin/list-products"
+                            >Quản lý sản phẩm hệ thống</a></li>
+                        <li><form
+                                action="/api/user/log-out"
+                                method="POST"
+                                id="form-3"
+                                class="dropdown-item"
+                            ><button
+                                    style="border:none;background-color:#fff"
+                                >Đăng xuất</button>
+                            </form></li>
+                    </ul>
+                </div>
+                    `
+                    }
+                    return `
+                        <div class="dropdown">
+                    <a
+                        class="btn btn-main dropdown-toggle btn-user"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                    ${user.name}
+                    </a>
+                    <ul class="dropdown-menu" style="top:23px">
+                        <li><a
+                                class="dropdown-item"
+                                href="/me/stored/personalinfor"
+                            >Tài khoản của tôi</a></li>
+                        <li><a
+                                class="dropdown-item"
+                                href="/products/create"
+                            >Đăng bán hàng</a></li>
+                        <li><a
+                                class="dropdown-item"
+                                href="/me/stored/myproducts"
+                            >Quản lý sản phẩm</a></li>
+                        <li><form
+                                action="/api/user/log-out"
+                                method="POST"
+                                id="form-3"
+                                class="dropdown-item"
+                            ><button
+                                    style="border:none;background-color:#fff"
+                                >Đăng xuất</button>
+                            </form></li>
+                    </ul>
+                </div>
+                    `
+                }
+                else{
+                    return `
+                        <li class="header__navbar-item header__navbar-item-separate btn-register">
+                            <a href="/sign-up">Đăng Ký</a>
+                        </li>
+                        <li class="header__navbar-item btn-login">
+                            <a href="/sign-in">Đăng Nhập</a>
+                        </li>
+                    `
+                }
             },
             sortable: (field, sort) => {
                 const sortType = field === sort.column ? sort.type : "default";
@@ -106,6 +199,15 @@ app.engine(
                 const type = types[sortType];
                 return `<a href="?_sort&column=${field}&type=${type}"><i class='${icon}'></i></a>`;
             },
+
+            getQuantity:(user)=>{
+                if(user){
+                    const decoded = jwtVerify.jwtVerifyAccessToken(
+                        req.cookies.access_token
+                    );
+                    const userId = decoded.payload.id;
+                }
+            }
         },
     })
 );

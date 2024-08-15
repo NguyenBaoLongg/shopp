@@ -38,7 +38,7 @@ const deleteUserInDB = async (id) => {
                         message: "The user isn't defined",
                     });
                 }
-                // await User.findByIdAndDelete(id);
+                await User.findByIdAndDelete(id);
                 resolve({
                     status: "SUCCESS",
                     message: "Delete user success",

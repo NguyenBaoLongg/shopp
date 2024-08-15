@@ -2,24 +2,46 @@ const Product = require("../models/product");
 const MyProduct = require("../models/myproducts");
 const { mongooseToObject } = require("../../resources/util/mongoose");
 const ProductService = require("../../resources/services/ProductService");
+const User = require("../models/user");
+const jwtVerify = require("../../resources/services/JwtVerify");
 const port = 3000;
 
 class ProductController {
     //[GET]/products/:slug
     show = async (req, res, next) => {
         const productId = req.params.id;
-        await Product.findOne({ _id: productId })
+        const decoded = jwtVerify.jwtVerifyAccessToken(
+            req.cookies.access_token);
+            if(decoded){
+                const userId = decoded.payload.id;
+                const user = await User.findById(userId); 
+                await Product.findOne({ _id: productId })
+                .then((product) => {
+                res.render("products/show", {
+                    product: mongooseToObject(product),
+                    user:user.toObject(),
+                    });
+                })
+                .catch(next);
+            }
+            else{
+               await Product.findOne({ _id: productId })
             .then((product) => {
                 res.render("products/show", {
                     product: mongooseToObject(product),
                 });
             })
-            .catch(next);
+            .catch(next); 
+            }
     };
 
     //[GET]
     create(req, res, next) {
-        res.render("products/create");
+        User.findById({ _id: req.data._conditions._id }).then((user) => {
+            res.render("products/create", {
+                user: user.toObject(),
+            });
+        });
     }
 
     //[POST]
@@ -64,11 +86,16 @@ class ProductController {
     };
 
     //[GET]/products/:id/edit
-    edit(req, res, next) {
+    async edit(req, res, next) {
+        const decoded = jwtVerify.jwtVerifyAccessToken(
+            req.cookies.access_token);
+        const userId = decoded.payload.id;
+        const user = await User.findById(userId);
         MyProduct.findById(req.params.id)
             .then((product) =>
                 res.render("products/edit", {
                     product: mongooseToObject(product),
+                    user: user.toObject(),
                 })
             )
             .catch(next);
@@ -111,7 +138,11 @@ class ProductController {
             const response = await ProductService.deleteProductService(
                 productId
             );
-            return res.status(200).json(response);
+            if(response.status==="status"){
+                return res.redirect("back");
+            }
+            return res.redirect("back");
+            
         } catch (e) {
             return res.status(404).json({
                 status: "FAILED",
